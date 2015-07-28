@@ -1,3 +1,34 @@
+# Seyyah Not
+## 1. Provider'da new app
+
+<http://localhost:4000/users/sign_in> git ve,
+
+- user: user@example.com
+- pass: doorkeeper
+
+<http://localhost:4000/oauth/applications/new> git ve,
+
+```
+Application: test
+Callback url: http://localhost:3000/users/auth/doorkeeper/callback
+Application Id: XXX
+Secret: YYY
+```
+
+yeni app ekle.
+
+## 2. Client configuration
+
+`config/initializers/devise.rb` dosyasını bul ve güncelle,
+
+```ruby
+config.omniauth :doorkeeper,  DOORKEEPER_APP_ID, DOORKEEPER_APP_SECRET, :client_options =>  {:site => DOORKEEPER_APP_URL}
+```
+
+<http://localhost:3000/> adresine git ve,
+
+Sign in with OAuth 2 provider=> <http://localhost:3000/users/auth/doorkeeper> linkine tıkla.
+
 # Dookreeper Devise+Omniauth Client
 
 This app is an example of OAuth2 client. It was built in order to test
